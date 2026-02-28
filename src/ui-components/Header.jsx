@@ -156,7 +156,7 @@ export default function Header() {
 
                 <DropdownMenuContent>
                 <DropdownMenuItem variant="destructive" className='cursor-pointer' onClick={()=>{
-                    // localStorage.removeItem("access__token");
+                    localStorage.removeItem("access__token");
                     setIsLogined(false);
                 }}>
                     <LogOutIcon />

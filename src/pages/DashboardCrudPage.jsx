@@ -13,6 +13,11 @@ import { Loader } from 'lucide-react';
 
 export default function DashboardCrudPage() {
 
+  if(localStorage.getItem("access__token")==undefined) {
+    window.location.href=window.location.origin+'/login';
+  }
+
+
   const [searchParams, setSearchParams] = useSearchParams();
   const action = searchParams.get("action");
   const id = searchParams.get("id");

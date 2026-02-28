@@ -8,6 +8,11 @@ import {Link} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
+
+  if(localStorage.getItem("access__token")==undefined) {
+    window.location.href=window.location.origin+'/login';
+  }
+
   const apiState = useMainStateManager((state) => state.apiState);
   return (
     <>
