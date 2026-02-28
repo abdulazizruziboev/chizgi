@@ -16,7 +16,7 @@ export default function PageNotFound() {
                 <b>SAHIFA MAVJUD EMAS</b>
             </div>
             <Link to="/">
-            <Button variant='outline' className="cursor-pointer">
+            <Button variant='outline' className="cursor-pointer duration-0">
                 <House/>
                 Bosh sahifaga qaytish
             </Button>

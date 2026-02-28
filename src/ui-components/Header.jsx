@@ -36,17 +36,20 @@ export default function Header() {
     }
     })
 
-    const [isLight,setIslight] = useState(localStorage.getItem("theme")==="light"||localStorage.getItem("theme")===undefined);
+    const [isLight,setIslight] = useState(localStorage.getItem("theme")==="light");
 
     const [isLogined,setIsLogined] = useState(localStorage.getItem("access__token"));
 
     useEffect(()=>{
-        if(!isLight) {
-            document.body.classList.remove("dark");
-            document.body.classList.add("light");
+        if(localStorage.getItem("theme")==undefined) {
+            setIslight(true)
+        }
+        if(isLight) {
+            document.firstElementChild.classList.remove("dark");
+            document.firstElementChild.classList.add("light");
         } else {
-            document.body.classList.remove("light");
-            document.body.classList.add("dark");
+            document.firstElementChild.classList.remove("light");
+            document.firstElementChild.classList.add("dark");
         }
     },[isLight])
     
