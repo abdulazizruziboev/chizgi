@@ -27,15 +27,18 @@ export default function Login() {
 
   const [isLight,setIslight] = useState(localStorage.getItem("theme")==="light");
   
-  useEffect(()=>{
-      if(isLight) {
-          document.body.classList.remove("dark");
-          document.body.classList.add("light");
-      } else {
-          document.body.classList.remove("light");
-          document.body.classList.add("dark");
-      }
-  },[isLight])
+    useEffect(()=>{
+        if(localStorage.getItem("theme")==undefined) {
+            setIslight(true)
+        }
+        if(isLight) {
+            document.firstElementChild.classList.remove("dark");
+            document.firstElementChild.classList.add("light");
+        } else {
+            document.firstElementChild.classList.remove("light");
+            document.firstElementChild.classList.add("dark");
+        }
+    },[isLight])
 
   function handleLogin(e) {
     if(login.current.value.trim()=='') {
