@@ -36,12 +36,12 @@ export default function Header() {
     }
     })
 
-    const [isLight,setIslight] = useState(localStorage.getItem("theme")==="light");
+    const [isLight,setIslight] = useState(localStorage.getItem("theme")==="light"||localStorage.getItem("theme")===undefined);
 
     const [isLogined,setIsLogined] = useState(localStorage.getItem("access__token"));
 
     useEffect(()=>{
-        if(isLight) {
+        if(!isLight) {
             document.body.classList.remove("dark");
             document.body.classList.add("light");
         } else {
