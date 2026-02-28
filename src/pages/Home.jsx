@@ -22,24 +22,52 @@ import {
   TooltipTrigger,
   TooltipProvider
 } from "@/components/ui/tooltip";
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Inbox, ServerCog } from "lucide-react"
 import Footer from "@/ui-components/Footer"
 
-fetch("https://json-api.uz/api/project/chizmachilik/materials").then(r=>r.json())
-.then((r)=>{
-    setApiState(r['data']);
-})
 
 export default function Home() {
-  
   const apiState = useMainStateManager((state) => state.apiState);
 
+  const [error,setError] = React.useState(false);
+
+  const [loader,setLoader] = React.useState(true);
+
+  const [dataEmpty,setDataEmpty] = React.useState(false);
+  
+
+  if(error) {
+    document.body.classList.add("overflow-hidden");
+  }
+
+  React.useEffect(()=>{
+  fetch("https://json-api.uz/api/project/chizmachilik/materials").then(r=>r.json())
+  .then((r)=>{
+    setApiState(r['data']);
+    setLoader(false);
+    if(r['data'].length==0) {
+      setDataEmpty(true);
+    }
+  }).catch(e=>{
+    setError(true);
+    setLoader(false);
+  })
+  },[])
+
   return (
+
     <>
     <Header/>
+    {error&&<div className="fixed inset-0 bg-[#eee] dark:bg-[#1f1f1f] z-[9] flex items-center justify-center flex-col gap-2">
+      <ServerCog className="w-30 h-30"/>
+      <span className="text-center leading-[120%] text-[18px] font-bold">
+        Serverda proflaktika ishlari <br /> olib borilmoqda.
+      </span>
+    </div>}
+
     <main className="w-full py-8 px-3">
-    
-    <div className="max-w-[1440px] mx-auto mt-15">
+    <>
+    {!dataEmpty&&<div className="max-w-[1440px] mx-auto mt-15">
     <h2 className="font-[550] text-[22px] ml-2 mb-2">Eng Sara yangilari</h2>
     <Carousel
       opts={{
@@ -48,7 +76,7 @@ export default function Home() {
       className="w-full"
     >
     <CarouselContent >
-    {apiState.length>0>0?apiState
+    {apiState.length>0?apiState
     ?.filter(el => el.publishedAt > 2020)
     .slice(0, 6)
     .map(el => (
@@ -109,20 +137,34 @@ export default function Home() {
             <CarouselNext className="static cursor-pointer" />
       </div>
     </Carousel>
-    </div>
+    </div>}
 
+    {
+    !dataEmpty&&
     <div className="max-w-[1440px] w-full mx-auto mt-15">
     <h2 className="font-[550] text-[22px] ml-2 mb-2">Chizmachillikni biz bilan o'rganing</h2>
-    </div>
+    </div>}
     <div className="grid max-w-[1440px] w-full gap-8 sm:grid-cols-2 lg:grid-cols-3 mx-auto">
         {
-          apiState.length>0 ? apiState
+          !loader&&(!dataEmpty && apiState
           .filter(el=>el.cover?true:false)
           .map((el,inx)=>{
             return <BookCard key={el.id??inx} details={el}/>
-          }) : Array.from({length:21}).map((_,inx)=>(<BookCardSkeleton key={inx}/>))
+          })) 
         }
+        {loader&&Array.from({length:21}).map((_,inx)=>(<BookCardSkeleton key={inx}/>))}
     </div>
+    </>
+      <>
+      {!loader&&(dataEmpty&&<div className="w-full px-8 pt-6 pb-2 h-[100%] flex items-center flex-1 min-h-[100vh]">
+      <div className="mx-auto max-w-[1440px] w-full flex flex-col justify-center items-center">
+      <Inbox className="w-25 h-25 text-[#ddd]"/>
+      <h2 className="font-bold text-[22px] text-[#ddd]" >
+        Kitoblar mavjud emas
+      </h2>
+      </div>
+      </div>)}
+      </>
     </main>
     <Footer/>
     </>
