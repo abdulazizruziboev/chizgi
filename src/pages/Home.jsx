@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/tooltip";
 import { ArrowUpRight, Inbox, ServerCog } from "lucide-react"
 import Footer from "@/ui-components/Footer"
-
+import { Toaster , toast} from "sonner"
 
 export default function Home() {
   const apiState = useMainStateManager((state) => state.apiState);
@@ -34,11 +34,14 @@ export default function Home() {
   const [loader,setLoader] = React.useState(true);
 
   const [dataEmpty,setDataEmpty] = React.useState(false);
-  
 
   if(error) {
     document.body.classList.add("overflow-hidden");
   }
+
+  if(localStorage.getItem("access_token")==null) {
+    toast.info("Tizimga kirish orqali siz kitob qo'shish va tahrirlash imkoniyatiga ega bo'lasiz",{position:"top-center"});
+  };
 
   React.useEffect(()=>{
   fetch("https://json-api.uz/api/project/chizmachilik/materials").then(r=>r.json())
@@ -57,6 +60,7 @@ export default function Home() {
   return (
 
     <>
+    <Toaster/>
     <Header/>
     {error&&<div className="fixed inset-0 bg-[#eee] dark:bg-[#1f1f1f] z-[9] flex items-center justify-center flex-col gap-2">
       <ServerCog className="w-30 h-30"/>
