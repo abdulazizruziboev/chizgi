@@ -90,10 +90,11 @@ export default function Login() {
           isLight?(localStorage.setItem("theme","dark"),setIslight(false)):(localStorage.setItem("theme","light"),setIslight(true));
       }}>
           {isLight?<MoonIcon className="!w-5 !h-5"/>:<SunIcon className="!w-5 !h-5"/>}
+          {isLight?"Tungi":"Kunduzgi"}  rejim
       </Button>
       </TooltipTrigger>
       <TooltipContent>
-          <p>{isLight?"Tungi":"Kunduzgi"} rejim</p>
+          <p>Bossangiz {isLight?"tungi":"tunduzgi"} rejimga o'tasiz</p>
       </TooltipContent>
       </Tooltip>
       </TooltipProvider>
@@ -108,6 +109,9 @@ export default function Login() {
           <Input placeholder='Logini kiriting' type={'text'} ref={login} ></Input>
           <InputGroup>
           <InputGroupInput placeholder='Parolni kiriting' type={passType?"text":"password"}  ref={password}></InputGroupInput>
+          <TooltipProvider>
+          <Tooltip>
+          <TooltipTrigger asChild>
           <InputGroupAddon align="inline-end" className='cursor-pointer items-center justify-center flex' onClick={()=>{
             if(password.current.type=='password') {
               setPassType(true);
@@ -117,6 +121,12 @@ export default function Login() {
           }}>
             {!passType?<EyeOpenIcon/>:<EyeOffIcon />}
           </InputGroupAddon>
+          </TooltipTrigger>
+          <TooltipContent className={'mr-2'}>
+              <p>Bossangiz {passType?"parol ko'rinadi":"parol berkitiladi"}</p>
+          </TooltipContent>
+          </Tooltip> 
+          </TooltipProvider>
         </InputGroup>
           <Button className={'cursor-pointer'} onClick={(e)=>handleLogin(e)}>
             {reqeustLoad?

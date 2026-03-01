@@ -227,7 +227,7 @@ export default function Header() {
             </Button>
             </TooltipTrigger>
             <TooltipContent>
-                <p>Bosangiz {isLight?"tungi":"kunduzgi"} rejimga o'tasiz</p>
+                <p>Bossangiz {isLight?"tungi":"kunduzgi"} rejimga o'tasiz</p>
             </TooltipContent>
             </Tooltip>
             </TooltipProvider>
