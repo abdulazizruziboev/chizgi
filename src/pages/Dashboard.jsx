@@ -48,7 +48,7 @@ export default function Dashboard() {
     <main className="w-full px-3 py-5">
         <div className="flex max-w-[1440px] pb-5 items-center w-full mx-auto justify-end">
             <Link to={'/dashboard-crud?action=add'} className="">
-            <Button variant="outline" className={'cursor-pointer'}>
+            <Button variant="outline" className={'cursor-pointer duration-0'}>
                 <Plus/> Yangi kitob
             </Button>
             </Link>
