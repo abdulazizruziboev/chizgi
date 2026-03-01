@@ -194,7 +194,7 @@ export default function Catalogs() {
           .filter(el=>el.cover?true:false)
           .map((el,inx)=>{
             return <BookCard key={el.id??inx} details={el} from={'catalogs'}/>
-          }):<div className="w-full px-8 pt-6 pb-2 h-[100%] flex items-center flex-1 min-h-[50vh] col-span-full">
+          }):<div className="w-full px-8 pt-6 pb-2 h-[100%] flex items-center flex-1 min-h-[60vh] col-span-full">
             <div className="mx-auto max-w-[1440px] w-full flex flex-col justify-center items-center">
             <Inbox className="w-25 h-25 text-[#ddd]"/>
             <h2 className="font-bold text-[22px] text-[#ddd]" >
