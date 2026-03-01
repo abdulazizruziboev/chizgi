@@ -69,20 +69,22 @@ export default function Header() {
                 </span>
             </a>
 
-            <div className="hidden md:flex gap-x-4">
-                <NavLink to={'/'} className={'[&.active]:underline underline-offset-4 hover:opacity-70 transition-opacity transition-[text-decoration] duration-300 hover:underline'}>
+            <div className="hidden md:flex gap-x-4 rounded-full">
+                <NavLink to={'/'} className={' [&.active]:bg-[#0002] backdrop-blur-3xl [&.active]:text-black dark:[&.active]:text-white dark:[&.active]:bg-[#ddd2] hover:opacity-70 transition-opacity transition-[text-decoration] duration-300 hover:underline flex gap-2 px-3 py-1.5 rounded-full items-center'}>
+                <HomeIcon />
                     Bosh sahifa
                 </NavLink>
-                <NavLink to={'/dashboard'} className={'[&.active]:underline underline-offset-4 hover:opacity-70 transition-opacity transition-[text-decoration] duration-300 hover:underline'}>
+                <NavLink to={'/dashboard'} className={'[&.active]:bg-[#0002] backdrop-blur-3xl [&.active]:text-black dark:[&.active]:text-white dark:[&.active]:bg-[#ddd2] hover:opacity-70 transition-opacity transition-[text-decoration] duration-300 hover:underline flex gap-2 px-3 py-1.5 rounded-full items-center'}>
+                <Settings2/>
                     Boshqaruv paneli
                 </NavLink>
             </div>
 
             <div className="flex md:flex-row-reverse w-full md:w-auto justify-between items-center">
 
-           <div className="md:hidden">
+           <div className="md:hidden" >
             <TooltipProvider>
-            <DropdownMenu>
+            <DropdownMenu >  
                 <Tooltip>
                 <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
@@ -96,19 +98,19 @@ export default function Header() {
                 </TooltipContent>
                 </Tooltip>
 
-                <DropdownMenuContent>
-                <DropdownMenuItem  className='cursor-pointer' >
-                    <Link className="flex items-center gap-x-1" to={'/'}>
+                <DropdownMenuContent  className='ml-5 flex flex-col gap-1'>
+                <NavLink className="flex items-center gap-x-1 w-full [&.active]:bg-[#0001] rounded-[8px]"  to={'/'}>
+                <DropdownMenuItem  className='cursor-pointer w-full' >
                     <HomeIcon />
                     Bosh sahifa
-                    </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem >
-                    <Link className="flex items-center gap-x-1" to={'/dashboard'}>
+                </NavLink>
+                <NavLink className="flex items-center gap-x-1 w-full [&.active]:bg-[#ddd5] rounded-[5px]"   to={'/dashboard'}>
+                <DropdownMenuItem  className='cursor-pointer w-full hover:bg-[#ddd5]' >
                     <Settings2 />
                     Boshqaruv paneli
-                    </Link>
                 </DropdownMenuItem>
+                </NavLink>
                 </DropdownMenuContent>
             </DropdownMenu>
             </TooltipProvider>
@@ -133,6 +135,7 @@ export default function Header() {
                     <Link to={"/login"}>
                     <Button variant="ghost" className="cursor-pointer duration-0">
                         <ArrowRightEndOnRectangleIcon className="!w-[20px] !h-[20px]" />
+                        <p className="hidden sm:inline-block">Tizimga kirish</p>
                     </Button>
                     </Link>
                     </TooltipTrigger>
@@ -149,11 +152,12 @@ export default function Header() {
                     <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="cursor-pointer duration-0 transition-none">
                         <UserIcon className="!w-5 !h-5 !mb-[0.5px]" />
+                        <p className="hidden sm:inline-block">Hisob</p>
                     </Button>
                     </DropdownMenuTrigger>
                 </TooltipTrigger>
                 <TooltipContent>
-                    <p>Hisob</p>
+                    <p>Hisobni boshqaring</p>
                 </TooltipContent>
                 </Tooltip>
 
@@ -176,10 +180,11 @@ export default function Header() {
                 isLight?(localStorage.setItem("theme","dark"),setIslight(false)):(localStorage.setItem("theme","light"),setIslight(true));
             }}>
                 {isLight?<MoonIcon className="!w-5 !h-5"/>:<SunIcon className="!w-5 !h-5"/>}
+                <p className="hidden sm:inline-block">{isLight?"Tungi":"Kunduzgi"} rejim</p>
             </Button>
             </TooltipTrigger>
             <TooltipContent>
-                <p>{isLight?"Tungi":"Kunduzgi"} rejim</p>
+                <p>Bosangiz {isLight?"tungi":"kunduzgi"} rejimga o'tasiz</p>
             </TooltipContent>
             </Tooltip>
             </TooltipProvider>

@@ -39,7 +39,7 @@ export default function Home() {
     document.body.classList.add("overflow-hidden");
   }
 
-  if(localStorage.getItem("access_token")==null) {
+  if(localStorage.getItem("access__token")==null) {
     toast.info("Tizimga kirish orqali siz kitob qo'shish va tahrirlash imkoniyatiga ega bo'lasiz",{position:"top-center"});
   };
 
