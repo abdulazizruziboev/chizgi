@@ -64,7 +64,7 @@ export default function Dashboard() {
         </>}          
         {loader&&Array.from({length:21}).map((_,inx)=>(<BookCardSkeleton key={inx}/>))}
         </div>
-        {!loader&&(!dataEmpty&&<div className="w-full px-8 pt-6 pb-2 h-[100%] flex items-center flex-1 min-h-[100vh]">
+        {!loader&&(dataEmpty&&<div className="w-full px-8 pt-6 pb-2 h-[100%] flex items-center flex-1 min-h-[100vh]">
         <div className="mx-auto max-w-[1440px] w-full flex flex-col justify-center items-center">
         <Inbox className="w-25 h-25 text-[#ddd]"/>
         <h2 className="font-bold text-[22px] text-[#ddd]" >
