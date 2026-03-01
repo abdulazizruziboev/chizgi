@@ -1,4 +1,3 @@
-import { Button } from "../components/ui/button";
 import { NativeButton } from "../components/uitripled/native-button-shadcnui";
 import { Bars3Icon, MoonIcon, SunIcon , ArrowRightEndOnRectangleIcon} from "@heroicons/react/24/outline";
 import {
@@ -23,6 +22,18 @@ import {
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HomeIcon, LogOutIcon, UserIcon, Settings2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
 
 export default function Header() {
 
@@ -150,7 +161,10 @@ export default function Header() {
                 <Tooltip>
                 <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="cursor-pointer duration-0 transition-none">
+                    <Button
+                        variant="ghost"
+                        className="cursor-pointer duration-0 transition-none"
+                    >
                         <UserIcon className="!w-5 !h-5 !mb-[0.5px]" />
                         <p className="hidden sm:inline-block">Hisob</p>
                     </Button>
@@ -162,13 +176,42 @@ export default function Header() {
                 </Tooltip>
 
                 <DropdownMenuContent>
-                <DropdownMenuItem variant="destructive" className='cursor-pointer' onClick={()=>{
-                    localStorage.removeItem("access__token");
-                    setIsLogined(false);
-                }}>
-                    <LogOutIcon />
-                    Chiqish
+                <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                    <DropdownMenuItem
+                        variant="destructive"
+                        className="cursor-pointer"
+                        onSelect={(e) => e.preventDefault()} 
+                    >
+                        <LogOutIcon className="mr-2 h-4 w-4" />
+                        Chiqish
                     </DropdownMenuItem>
+                    </AlertDialogTrigger>
+
+                    <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>
+                        Rostdan ham chiqmoqchimisiz?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                        Hisobdan chiqganingizdan so‘ng qayta login qilishingiz kerak bo‘ladi.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <AlertDialogFooter>
+                        <AlertDialogCancel className={'cursor-pointer'}>Bekor qilish</AlertDialogCancel>
+                        <AlertDialogAction
+                        className={`bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 cursor-pointer duration-100`}
+                        onClick={() => {
+                            localStorage.removeItem("access__token");
+                            setIsLogined(false);
+                        }}
+                        >
+                        Chiqish
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
                 </DropdownMenuContent>
             </DropdownMenu>
             </TooltipProvider>

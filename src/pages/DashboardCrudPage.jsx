@@ -22,15 +22,31 @@ export default function DashboardCrudPage() {
   const [requestLoading,setReqeustLoading] = useState(false);
 
   useEffect(()=>{
+  if(action=="edit") {
+    toast.info("So'rov yuborilmoqda. Iltimos biroz kuting",{position:"top-center"});
   if(id!=null) {
+    if(apiState.length>0) {
     let founded = apiState.filter(el=>{
         if(el.id==id) {
           return true;
         }
       })
+    
+    toast.info("Ma'lumotlar to'ldirildi. Tahrirlashingiz mumkin",{position:"top-center"});
     setEditFillData(founded[0]);
-  }
-  },[id,apiState])
+    } else {
+      fetch(`https://json-api.uz/api/project/chizmachilik/materials/${id}`)
+      .then(r=>r.text()).then(r=>{
+      if(r!="Resource not found") {
+        let parsedData = JSON.parse(r);
+        setEditFillData(parsedData);
+        toast.info("Ma'lumotlar to'ldirildi. Tahrirlashingiz mumkin",{position:"top-center"});
+      } else if(r=="Resource not found") {
+        toast.error("Bunday resurs mavjud emas.",{position:"top-center"})
+      }})
+    }
+  }}
+  },[id])
 
   function handleForm(e) {
     e.preventDefault();
@@ -91,6 +107,7 @@ export default function DashboardCrudPage() {
         }).catch(err=>{
           console.log(err);
           toast.error("Xatolik yuz berdi. Keyinroq qayta urining",{position:'top-center'});
+          setReqeustLoading(false);
         })
       } else if (action=="add") {
         fetch(`https://json-api.uz/api/project/chizmachilik/materials`,{
@@ -110,7 +127,6 @@ export default function DashboardCrudPage() {
             
             toast.info("Muvaffaqiyatli. Ma'lumotlar qo'shildi",{position:'top-center'});
             setReqeustLoading(false);
-            window
             setTimeout(() => {            
               window.location.href= window.location.origin+"/dashboard"
             }, 1200);
@@ -118,6 +134,7 @@ export default function DashboardCrudPage() {
         }).catch(err=>{
           console.log(err);
           toast.error("Xatolik yuz berdi. Keyinroq qayta urining",{position:'top-center'});
+          setReqeustLoading(false);
         })
       }
 
@@ -183,7 +200,7 @@ export default function DashboardCrudPage() {
             Bekor qilish
           </Button>
           </Link>
-          <Button disabled={requestLoading==true?true:false} className={'cursor-pointer w-full sm:w-auto'}>
+          <Button disabled={requestLoading==true?true:false} className={'cursor-pointer w-full sm:w-auto min-w-[100px]'}>
             {requestLoading==true?
             <span className='animate-spin'>
               <Loader/>

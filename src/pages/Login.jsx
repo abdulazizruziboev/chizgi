@@ -74,7 +74,7 @@ export default function Login() {
           toast.info('Login yoki parol xato',{position:'top-center'});
         } else {
           localStorage.setItem("access__token",JSON.parse(r).access_token);
-          window.location.href=window.location.origin;
+          window.location.href=window.location.origin+"?from=login";
         }
       })
     }

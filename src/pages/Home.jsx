@@ -25,6 +25,8 @@ import {
 import { ArrowUpRight, Inbox, ServerCog } from "lucide-react"
 import Footer from "@/ui-components/Footer"
 import { Toaster , toast} from "sonner"
+import {useSearchParams} from "react-router-dom"
+
 
 export default function Home() {
   const apiState = useMainStateManager((state) => state.apiState);
@@ -35,13 +37,22 @@ export default function Home() {
 
   const [dataEmpty,setDataEmpty] = React.useState(false);
 
+  const [searchParams, setSearchParams] = useSearchParams()
+  const from = searchParams.get("from");
+
   if(error) {
     document.body.classList.add("overflow-hidden");
   }
 
+  useEffect(()=>{
   if(localStorage.getItem("access__token")==null) {
     toast.info("Tizimga kirish orqali siz kitob qo'shish va tahrirlash imkoniyatiga ega bo'lasiz",{position:"top-center"});
+  } else {
+    if(from==="login") {
+      toast.info("Siz endi kitoblarni qo'shish va tahrirlash imkoniyatlariga egasiz! Boshqaruv paneliga o'ting",{position:"top-center"});
+    }
   };
+  },[])
 
   React.useEffect(()=>{
   fetch("https://json-api.uz/api/project/chizmachilik/materials").then(r=>r.json())
