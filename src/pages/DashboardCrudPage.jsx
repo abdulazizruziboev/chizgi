@@ -146,7 +146,6 @@ export default function DashboardCrudPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-    <Toaster/>
     <Header/>
     <main className='w-full px-8 pt-6 pb-2 h-[100%] flex items-center flex-1'>
       <form className='mx-auto max-w-[1440px] w-full grid gap-3 lg:grid-cols-2' onSubmit={(e)=>handleForm(e)}>

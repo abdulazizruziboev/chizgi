@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import PageNotFound from "./pages/PageNotFound";
 import Dashboard from "./pages/Dashboard";
 import DashboardCrudPage from "./pages/DashboardCrudPage";
+import Catalogs from "./pages/Catalogs";
 
 function App() {
 
@@ -27,6 +28,9 @@ function App() {
     },{
       element: <DashboardCrudPage/>,
       path:"/dashboard-crud"
+    },{
+      element: <Catalogs/>,
+      path:"/catalogs"
     },{
       element: <PageNotFound/>,
       path:"*"

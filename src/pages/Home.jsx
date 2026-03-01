@@ -26,6 +26,7 @@ import { ArrowUpRight, Inbox, ServerCog } from "lucide-react"
 import Footer from "@/ui-components/Footer"
 import { Toaster , toast} from "sonner"
 import {useSearchParams} from "react-router-dom"
+import BottomNavigationPanel from "@/ui-components/BottomNavigationPanel"
 
 
 export default function Home() {
@@ -71,7 +72,6 @@ export default function Home() {
   return (
 
     <>
-    <Toaster/>
     <Header/>
     {error&&<div className="fixed inset-0 bg-[#eee] dark:bg-[#1f1f1f] z-[9] flex items-center justify-center flex-col gap-2">
       <ServerCog className="w-30 h-30"/>
@@ -80,7 +80,7 @@ export default function Home() {
       </span>
     </div>}
 
-    <main className="w-full py-8 px-3">
+    <main className="w-full py-8 px-3 mb-[65px] lg:mb-0">
     <>
     {!dataEmpty&&<div className="max-w-[1440px] mx-auto mt-15">
     <h2 className="font-[550] text-[22px] ml-2 mb-2">Eng Sara yangilari</h2>
@@ -181,7 +181,10 @@ export default function Home() {
       </div>)}
       </>
     </main>
-    <Footer/>
+    <div className="hidden lg:inline-block w-full">
+      <Footer/>
+    </div>
+    <BottomNavigationPanel/>
     </>
   )
 }

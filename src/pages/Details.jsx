@@ -70,7 +70,7 @@ return (
 <Header/>
 <main className='w-full flex items-center justify-center px-10 py-10 flex-col gap-10'>
 <div className='max-w-[1440px] mx-auto w-full'>
-    <Link to={from=='dashboard'?'/dashboard':'/'}>
+    <Link to={from!=undefined?'/'+from:'/'}>
     <Button variant='outline' className={'cursor-pointer scale-105 duration-0'}><ArrowLeft className='!w-5 !h-5'/> Orqaga</Button>
     </Link>
 </div>

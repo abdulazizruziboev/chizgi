@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { HomeIcon, LogOutIcon, UserIcon, Settings2 } from "lucide-react";
+import { HomeIcon, LogOutIcon, UserIcon, Settings2, Layers } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,6 +34,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { Toaster } from "sonner";
 
 export default function Header() {
 
@@ -62,12 +63,17 @@ export default function Header() {
             document.firstElementChild.classList.remove("light");
             document.firstElementChild.classList.add("dark");
         }
+    window.addEventListener("storage",()=>{
+        setIslight(localStorage.getItem("theme")==="light");
+        
+    })
     },[isLight])
     
+
     return (
 
     <>
-
+    <Toaster theme={isLight?'light':'dark'} />
     <header className={`bg-[#fff] min-h-[60px] border-b-1 flex items-center justify-center px-5 dark:bg-[#1F1F1F] border-[#ddd5] dark:border-[#ddd2] top-0 ${sticky?"sticky":"static"} z-10`}>
         <div className="max-w-[1440px] flex items-center justify-between w-full flex-wrap">            
 
@@ -80,12 +86,16 @@ export default function Header() {
                 </span>
             </a>
 
-            <div className="hidden md:flex gap-x-4 rounded-full">
-                <NavLink to={'/'} className={' [&.active]:bg-[#0002] backdrop-blur-3xl [&.active]:text-black dark:[&.active]:text-white dark:[&.active]:bg-[#ddd2] hover:opacity-70 transition-opacity transition-[text-decoration] duration-300 hover:underline flex gap-2 px-3 py-1.5 rounded-full items-center'}>
+            <div className="hidden lg:flex gap-x-4 rounded-full">
+                <NavLink to={'/'} className={'[&.active]:border-1 [&.active]:bg-[#ddd6] dark:[&.active]:bg-[#ddd3] dark:[&.active]:border-[#fff2] border-[#0003]  hover:opacity-60 transition-opacity transition-[text-decoration] duration-300 flex gap-2 px-3 py-1.5 rounded-full items-center active:scale-95 transition-transform'}>
                 <HomeIcon />
                     Bosh sahifa
                 </NavLink>
-                <NavLink to={'/dashboard'} className={'[&.active]:bg-[#0002] backdrop-blur-3xl [&.active]:text-black dark:[&.active]:text-white dark:[&.active]:bg-[#ddd2] hover:opacity-70 transition-opacity transition-[text-decoration] duration-300 hover:underline flex gap-2 px-3 py-1.5 rounded-full items-center'}>
+                <NavLink to={'/catalogs'} className={'[&.active]:border-1 [&.active]:bg-[#ddd6] dark:[&.active]:bg-[#ddd3] dark:[&.active]:border-[#fff2] border-[#0003]  hover:opacity-60 transition-opacity transition-[text-decoration] duration-300 flex gap-2 px-3 py-1.5 rounded-full items-center active:scale-95 transition-transform'}>
+                <Layers/>
+                    Kataloglar
+                </NavLink>
+                <NavLink to={'/dashboard'} className={'[&.active]:border-1 [&.active]:bg-[#ddd6] dark:[&.active]:bg-[#ddd3] dark:[&.active]:border-[#fff2] border-[#0003]  hover:opacity-60 transition-opacity transition-[text-decoration] duration-300 flex gap-2 px-3 py-1.5 rounded-full items-center active:scale-95 transition-transform'}>
                 <Settings2/>
                     Boshqaruv paneli
                 </NavLink>
@@ -93,40 +103,7 @@ export default function Header() {
 
             <div className="flex md:flex-row-reverse w-full md:w-auto justify-between items-center">
 
-           <div className="md:hidden" >
-            <TooltipProvider>
-            <DropdownMenu >  
-                <Tooltip>
-                <TooltipTrigger asChild>
-                    <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="cursor-pointer duration-0">
-                        <Bars3Icon className="!w-[20px] !h-[20px]" />
-                    </Button>
-                    </DropdownMenuTrigger>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>Menyu</p>
-                </TooltipContent>
-                </Tooltip>
-
-                <DropdownMenuContent  className='ml-5 flex flex-col gap-1'>
-                <NavLink className="flex items-center gap-x-1 w-full [&.active]:bg-[#0001] rounded-[8px]"  to={'/'}>
-                <DropdownMenuItem  className='cursor-pointer w-full' >
-                    <HomeIcon />
-                    Bosh sahifa
-                </DropdownMenuItem>
-                </NavLink>
-                <NavLink className="flex items-center gap-x-1 w-full [&.active]:bg-[#ddd5] rounded-[5px]"   to={'/dashboard'}>
-                <DropdownMenuItem  className='cursor-pointer w-full hover:bg-[#ddd5]' >
-                    <Settings2 />
-                    Boshqaruv paneli
-                </DropdownMenuItem>
-                </NavLink>
-                </DropdownMenuContent>
-            </DropdownMenu>
-            </TooltipProvider>
-           </div>
-
+           
             
             <a href="/" className="flex hover:opacity-[80%] transition-opacity duration-500 md:hidden">
                 <span className="font-bold">
@@ -180,7 +157,7 @@ export default function Header() {
                     <AlertDialogTrigger asChild>
                     <DropdownMenuItem
                         variant="destructive"
-                        className="cursor-pointer"
+                        className="cursor-pointer !focus:border-red-500"
                         onSelect={(e) => e.preventDefault()} 
                     >
                         <LogOutIcon className="mr-2 h-4 w-4" />

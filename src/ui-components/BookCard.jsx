@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card"
 import { ArrowUpRight , SquarePen } from "lucide-react";
 
-export function BookCard({details,type}) {
+export function BookCard({details,type,from}) {
   return (
     <>
     <Card className="relative mx-auto w-full pt-0 overflow-hidden h-auto min-h-[395px] pb-4" data-aos='fade-up' >
@@ -37,7 +37,7 @@ export function BookCard({details,type}) {
         </Button>
         </Link>
         }
-        <Link to={type=='dashboard'?`/details/${details?.id}?from=dashboard`:`/details/${details?.id}`} className="flex-1 lg:flex-none">
+        <Link to={from!=undefined?`/details/${details?.id}?from=${from}`:`/details/${details?.id}`} className="flex-1 lg:flex-none">
         <Button className="cursor-pointer duration-0 w-full" variant="outline" >Batafsil ma'lumot <ArrowUpRight/></Button>
         </Link>
       </CardFooter>

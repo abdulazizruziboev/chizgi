@@ -39,7 +39,7 @@ export default function Login() {
             document.firstElementChild.classList.add("dark");
         }
     },[isLight])
-
+  
   function handleLogin(e) {
     if(login.current.value.trim()=='') {
       toast.warning('Iltimos login-ni kiriting',{position:'top-center'});
@@ -94,13 +94,14 @@ export default function Login() {
       </Button>
       </TooltipTrigger>
       <TooltipContent>
-          <p>Bossangiz {isLight?"tungi":"tunduzgi"} rejimga o'tasiz</p>
+          <p>Bossangiz {isLight?"tungi":"kunduzgi"} rejimga o'tasiz</p>
       </TooltipContent>
       </Tooltip>
       </TooltipProvider>
       </div>
       
-      <Toaster />
+      <Toaster theme={isLight?"light":"dark"} />
+
         <form className='max-w-[420px] w-full flex gap-3 flex-col' onSubmit={(e)=>e.preventDefault()}>
           <div className='flex flex-col'>
           <span><b>chiz</b>gi</span>
@@ -112,7 +113,7 @@ export default function Login() {
           <TooltipProvider>
           <Tooltip>
           <TooltipTrigger asChild>
-          <InputGroupAddon align="inline-end" className='cursor-pointer items-center justify-center flex' onClick={()=>{
+          <Button align="inline-end" variant='ghost' className='cursor-pointer items-center justify-center flex' onClick={()=>{
             if(password.current.type=='password') {
               setPassType(true);
             } else {
@@ -120,7 +121,7 @@ export default function Login() {
             }
           }}>
             {!passType?<EyeOpenIcon/>:<EyeOffIcon />}
-          </InputGroupAddon>
+          </Button>
           </TooltipTrigger>
           <TooltipContent className={'mr-2'}>
               <p>Bossangiz {passType?"parol ko'rinadi":"parol berkitiladi"}</p>
@@ -128,7 +129,7 @@ export default function Login() {
           </Tooltip> 
           </TooltipProvider>
         </InputGroup>
-          <Button className={'cursor-pointer'} onClick={(e)=>handleLogin(e)}>
+          <Button className={'cursor-pointer duration-0'} onClick={(e)=>handleLogin(e)}>
             {reqeustLoad?
              <LoaderIcon className="animate-spin" />
             :"Tizimga kirish"}

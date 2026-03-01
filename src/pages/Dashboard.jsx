@@ -7,6 +7,7 @@ import { Plus , Inbox , ServerCog} from "lucide-react";
 import {Link} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import * as React from "react";
+import BottomNavigationPanel from "@/ui-components/BottomNavigationPanel";
 
 export default function Dashboard() {
 
@@ -45,7 +46,7 @@ export default function Dashboard() {
       </span>
     </div>}
     <Header/>
-    <main className="w-full px-3 py-5">
+    <main className="w-full px-3 py-5 mb-[65px] lg:mb-0">
         <div className="flex max-w-[1440px] pb-5 items-center w-full mx-auto justify-end">
             <Link to={'/dashboard-crud?action=add'} className="">
             <Button variant="outline" className={'cursor-pointer duration-0'}>
@@ -59,7 +60,7 @@ export default function Dashboard() {
         {apiState
         .filter(el=>el.cover?true:false)
         .map((el,inx)=>{
-        return <BookCard key={el.id??inx} details={el} type={'dashboard'}/>
+        return <BookCard key={el.id??inx} details={el} type={'dashboard'} from={'dashboard'}/>
         })}
         </>}          
         {loader&&Array.from({length:21}).map((_,inx)=>(<BookCardSkeleton key={inx}/>))}
@@ -73,7 +74,10 @@ export default function Dashboard() {
         </div>
         </div>)}
     </main>
-    <Footer/>
+    <div className="hidden lg:inline-block w-full">
+      <Footer/>
+    </div>
+    <BottomNavigationPanel/>
     </>
   )
 }
