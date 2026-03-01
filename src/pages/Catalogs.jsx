@@ -153,24 +153,36 @@ export default function Catalogs() {
         })            
     }}
     >
-        <div className="flex">
-        <div className="flex gap-[6px] items-center leading-[100%] relative left-[-2px]">
+        <div className="flex flex-col py-3 md:flex-row">
+        <div className="flex gap-[6px] items-center leading-[100%] relative left-[-2px] flex-col items-start sm:items-center sm:flex-row">
             &nbsp;Yil:
-            <Input defaultValue={searchParams.get("yearFrom")?Number(searchParams.get("yearFrom")):0} placeholder="1980" className={'h-[30px]'} name="yearFrom"/>
-            &nbsp;dan
-            <Input defaultValue={searchParams.get("yearTo")?Number(searchParams.get("yearTo")):new Date().getFullYear()} placeholder="1980" className={'h-[30px]'} name="yearTo"/> 
-            &nbsp;gacha
+            <div className="flex items-center w-full">
+            <Input defaultValue={searchParams.get("yearFrom")?Number(searchParams.get("yearFrom")):0} placeholder="1980" className={'h-[30px] w-full'} name="yearFrom"/>
+            <p>&nbsp;dan</p>
+            </div>
+            <div className="flex items-center w-full">
+            <Input defaultValue={searchParams.get("yearTo")?Number(searchParams.get("yearTo")):new Date().getFullYear()} placeholder="1980" className={'h-[30px] w-full'} name="yearTo"/> 
+            <p>&nbsp;gacha</p>
+            </div>
         </div>
-        <hr className="rotate-90 w-10 h-1 my-auto"/>
-        <div className="flex gap-[6px] items-center max-w-[] leading-[100%]" >
+        <hr className="my-3 md:rotate-90 md:w-10 md:h-1 md:my-auto"/>
+        <div className="flex gap-[6px] leading-[100%] relative left-[-2px] flex-col items-start sm:items-center sm:flex-row" >
             &nbsp;Sahifalar:
-            <Input defaultValue={searchParams.get("pageFrom")?Number(searchParams.get("pageFrom")):0} placeholder="10" className={'h-[30px]'} name="pageFrom"/>
+            <div className="flex items-center w-full">
+            <Input defaultValue={searchParams.get("pageFrom")?Number(searchParams.get("pageFrom")):0} placeholder="10" className={'h-[30px] w-full'} name="pageFrom"/>
+            <p>
             &nbsp;dan
-            <Input defaultValue={searchParams.get("pageTo")?Number(searchParams.get("pageTo")):2000} placeholder="1000" className={'h-[30px]'} name="pageTo"/> 
+            </p>
+            </div>
+            <div className="flex items-center w-full">
+            <Input defaultValue={searchParams.get("pageTo")?Number(searchParams.get("pageTo")):2000} placeholder="1000" className={'h-[30px] w-full'} name="pageTo"/> 
+            <p>
             &nbsp;gacha
+            </p>
+            </div>
         </div>
         </div>
-        <hr className="mx-10"/>
+        <hr className="mx-10 mb-2"/>
         <div className="w-full grid grid-cols-2 gap-3">
         <Button type='reset' className={'w-full duration-0'} variant="outline" onClick={() => setSearchParams({})}>
             <FunnelX/>
